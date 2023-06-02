@@ -1,0 +1,58 @@
+<callback-filtro [socket]="_socket" (filtro)="getFiltro($event)"></callback-filtro>
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <strong>Callbacks</strong>
+        <button type="button" class="btn btn-primary" (click)="exportExcel()">
+            <i class="bi bi-file-earmark-arrow-down"></i>
+            Download Excel
+        </button>
+    </div>
+    <div class="card-body p-0">
+        <app-callbacks-table (_socket)="fnSocket($event)" (_meta)="fnMeta($event)" [_filter]="_filtro"></app-callbacks-table>
+    </div>
+</div>
+
+<ng-container *ngIf="callbacksExcel">
+
+    <!-- EXPORTABLE -->
+    <table id="excel-table" class="d-none">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Distribuidora</th>
+                <th scope="col">Ordem</th>
+                <th scope="col">Reclamação</th>
+                <th scope="col">Data</th>
+                <th scope="col">Duração</th>
+                <th scope="col">Gerência</th>
+                <th scope="col">Microregião</th>
+                <!-- <th scope="col">Medida Adotada</th> -->
+                <th scope="col">Resultado</th>
+                <th scope="col">Motivo</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Usuário</th>
+                <th scope="col">Obervação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let callback of callbacksExcel" style="cursor: pointer;">
+                <td scope="row">{{callback.id}}</td>
+                <td>{{callback.distribuidora}}</td>
+                <!-- <td>{{callback.numeroOrdem}}</td> -->
+                <td>{{callback.avisoNumero}}</td>
+                <td>{{callback.dataInicio | date : 'dd/MM/YYYY HH:mm'}}</td>
+                <td>{{callback.dataFim | date : 'dd/MM/YYYY HH:mm'}}</td>
+                <td>{{callback.duracao | secondsToTime}}</td>
+                <td>{{callback.gerencia}}</td>
+                <td>{{callback.microregiao}}</td>
+                <td>{{callback.resultCode | resultCode}}</td>
+                <td>{{callback.subtipoDesc}}</td>
+                <td>{{callback.unidadeConsumidora}}</td>
+                <td>{{callback.username | uppercase}}</td>
+                <td>{{callback.observacao}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</ng-container>

@@ -1,0 +1,126 @@
+<div class="d-flex gap-2">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header bg-secondary text-white">
+                Callbacks Automáticos | Ultimas 24h
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Enviando</strong>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{enviando}}</p>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Processando</strong>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{processando}}</p>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header bg-success  text-white">
+                                <strong>Finalizado</strong>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{finalizado}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mt-2">
+                        <div class="card">
+                            <div class="card-header bg-danger text-white">
+                                <strong>Numero errado</strong>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{numeroErrado}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mt-2">
+                        <div class="card">
+                            <div class="card-header bg-warning text-white">
+                                <strong>Sem Retorno da URA</strong>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{semRetornoUra}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mt-2">
+                        <div class="card">
+                            <div class="card-header bg-secondary text-white">
+                                <strong>Total</strong>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{total}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header bg-secondary text-white">
+                Comunicação Pro-Ativa | Ultimas 24h
+            </div>
+            <div class="card-body d-flex gap-2 flex-column">
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">
+                        <strong>Recebidas</strong>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{recebidos}}</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">
+                        <strong>Enviadas</strong>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{enviados}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card mt-3">
+    <div class="card-header">
+        Status do e-Callback
+    </div>
+    <div class="card-body">
+        <ngx-gauge 
+            [max]="300" 
+            [size]="180" 
+            [type]="'arch'" 
+            [thick]="15"
+            [value]="apiHealth" 
+            [backgroundColor]="'#ecf0f1'"
+            [foregroundColor]="apiHealth < 200 ? '#2ecc71' : (apiHealth > 200 && apiHealth < 300) ? '#ffd740' : '#e74c3c'"
+            [label]="apiHealth < 200  ? 'Normal' : (apiHealth > 200 && apiHealth < 300) ? 'Atenção' : 'Risco de falha'"  
+            [append]="'ms'">
+        </ngx-gauge>
+    </div>
+</div>
+

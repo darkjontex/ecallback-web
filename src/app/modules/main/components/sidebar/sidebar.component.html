@@ -1,0 +1,58 @@
+<div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
+    <div class="header">
+        <h1 class="title">
+            e-Callback
+        </h1>
+        <button class="btn btn-link" (click)="handleSidebarToggle()">
+            <i class="bi" [ngClass]="{'bi-list' : !isExpanded, 'bi-x-lg': isExpanded}" style="font-size: 1.4rem;"></i>
+        </button>
+    </div>
+    <div class="content">
+        <div class="link">
+            <div class="content" [routerLink]="['/']" [routerLinkActive]="'active'"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="bi bi-speedometer"></i>
+                <div class="title">Dashboard</div>
+            </div>
+        </div>
+        <div class="link">
+            <div class="content" [routerLink]="['/avisos']" [routerLinkActive]="'active'"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="bi bi-inboxes"></i>
+                <div class="title">Avisos</div>
+            </div>
+        </div>
+        <div class="link">
+            <div class="content" [routerLink]="['/callbacks']" [routerLinkActive]="'active'"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="bi bi-telephone-forward"></i>
+                <div class="title">Callbacks</div>
+            </div>
+        </div>
+        <div class="link">
+            <div class="content" [routerLink]="['/incidencias']" [routerLinkActive]="'active'"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="bi bi-exclamation-triangle"></i>
+                <div class="title">Incidências</div>
+            </div>
+        </div>
+        <div class="link" *ngIf="roles.includes('ADMIN') || roles.includes('ROOT')">
+            <div class="content" [routerLink]="['/','usuarios']" [routerLinkActive]="'active'"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="bi bi-people"></i>
+                <div class="title">Usuários</div>
+            </div>
+        </div>
+        <div class="link" *ngIf="roles.includes('ADMIN') || roles.includes('ROOT')">
+            <div class="content" [routerLink]="['/parametros']" [routerLinkActive]="'active'"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="bi bi-gear-wide"></i>
+                <div class="title">Parâmetros</div>
+            </div>
+        </div>
+    </div>
+    <div class="footer text-white d-flex justify-content-between flex-column align-items-center">
+        <p class="w-100 d-flex justify-content-between" style="font-size:0.9rem">{{username}} <a class="text-decoration-none text-white" [routerLink]="['/', 'auth', 'logout']">Sair <i class="bi bi-box-arrow-right"></i></a></p>
+        <p class="w-100 d-flex justify-content-between" style="font-size:0.9rem">Ramal: {{localStorage.getItem('RAMAL') | phone}} <a href="#" class="text-decoration-none text-white" (click)="resetRamal($event)"><i class="bi" [ngClass]="{'bi-x-lg' : localStorage.getItem('RAMAL'), 'bi-plus-lg': !localStorage.getItem('RAMAL')}"></i></a></p>
+    </div>
+</div>

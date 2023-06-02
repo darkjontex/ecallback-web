@@ -1,0 +1,97 @@
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        Usuarios
+        <button type="button" class="btn btn-sm btn-primary" (click)="openNewUserModal()" >Adicionar</button>
+    </div>
+    <div class="card-body p-0">
+       <div class="table-responsive">
+        <table class="table table-hover table-striped" style="font-size: 0.8rem">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Permissões</th>
+                    <th scope="col">Ultimo Login</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of (usuarios| async)?.data" style="cursor: pointer;">
+                    <td scope="row">{{usuario.username}}</td>
+                    <td>{{usuario.firstName}} {{usuario.lastName}}</td>
+                    <td>{{usuario.roles | json}}</td>
+                    <td>{{usuario.ultimoLogin}}</td>
+                    <td>
+                        <ng-container *ngIf="usuario.username !== 'root' && usuario.username !== 'admin'">
+                            <button type="button" class="btn btn-sm btn-warning">
+                                <i class="bi" [ngClass]="{'bi-unlock': !usuario.isBlocked, 'bi-lock': usuario.isBlocked}"></i>
+                                {{usuario.isBlocked ? 'Desbloquear' : 'Bloquear'}}
+                            </button>
+                            <button type="button" class="btn btn-sm btn-danger">Excluir</button>
+                        </ng-container>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+       </div>
+
+       <app-pagination [socket]="_socket" [meta]="(usuarios| async).meta"></app-pagination>
+
+    </div>
+</div>
+
+
+<ng-template #userModalForm>    
+<div class="card">
+    <div class="card-header">
+        Novo usuário
+    </div>
+    <div class="card-body">
+            <form>
+                <div class="alert alert-warning" role="alert">
+                    <strong>Atenção!</strong> O Usuário deve ser o BR ou CPF
+                </div>
+            
+                <div class="form-floating mb-3">
+                    <input
+                    type="text"
+                    class="form-control" name="formId1" id="formId1" placeholder="">
+                    <label for="formId1">Usuário</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                <input
+                    type="text"
+                    class="form-control" name="formId1" id="formId1" placeholder="">
+                <label for="formId1">Nome</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input
+                    type="text"
+                    class="form-control" name="formId1" id="formId1" placeholder="">
+                    <label for="formId1">Sobrenome</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input
+                    type="text"
+                    class="form-control" name="formId1" id="formId1" placeholder="">
+                    <label for="formId1">Celular</label>
+                </div>
+
+                <div class="mb-3">
+                    <ng-multiselect-dropdown formControlName="roles" [data]="roles" [settings]="dropdownSettings">
+                    </ng-multiselect-dropdown>                    
+                </div>
+
+                <div class="alert alert-info" role="alert">
+                    <strong>Atenção!</strong> A senha será enviada para o celular informado
+                </div>
+
+                <button type="button" class="btn btn-primary">Salvar</button>
+            </form>
+    </div>
+</div>
+
+</ng-template>

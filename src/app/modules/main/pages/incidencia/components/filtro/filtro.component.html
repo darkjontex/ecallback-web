@@ -1,0 +1,99 @@
+<!-- {{filterData | async | json}} -->
+<div class="card mb-3">
+    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+        <ngb-panel id="ngb-panel-0">
+            <ng-template ngbPanelTitle [type]="'secondary'">
+                Filtro&nbsp;<span *ngIf="!acc.isExpanded('ngb-panel-0')">{{ filterTitle }}</span>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <form [formGroup]="form" action="" method="post" (ngSubmit)="onSubmit()" class="d-grid gap-1">
+                    <div class="row">
+                        <div class="col-3">
+                            <input class="form-control" type="text" formControlName="numero"
+                                placeholder="Número de incidência" [(ngModel)]="selectedNumero"
+                                (ngModelChange)="maskFilled($event)" maxlength="11">
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group">
+                                <input class="form-control" formControlName="dataInicio" name="dpDataInicio"
+                                    ngbDatepicker #dpDataInicio="ngbDatepicker" placeholder="Data Início"
+                                    [(ngModel)]="selectedDataInicio" [autoClose]="'outside'" 
+                                    (click)="dpDataInicio.toggle()" />
+                                <button class="btn btn-outline-secondary bi bi-calendar3"
+                                    (click)="dpDataInicio.toggle()" type="button">
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group">
+                                <input class="form-control" formControlName="lastCallbackCreatedAt"
+                                    name="dpLastCallbackCreatedAt" ngbDatepicker
+                                    #dpLastCallbackCreatedAt="ngbDatepicker" placeholder="Data último Callback"
+                                    [(ngModel)]="selectedLastCallbackCreatedAt" [autoClose]="'outside'" 
+                                    (click)="dpLastCallbackCreatedAt.toggle()" />
+                                <button class="btn btn-outline-secondary bi bi-calendar3"
+                                    (click)="dpLastCallbackCreatedAt.toggle()" type="button">
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <ng-multiselect-dropdown [placeholder]="'Departamentos'" [settings]="dropdownSettings"
+                                [data]="(filterData | async)?.departamento" [(ngModel)]="selectedDepartamento"
+                                formControlName="departamento">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <ng-multiselect-dropdown [placeholder]="'Gerências'" [settings]="dropdownSettings"
+                                [data]="(filterData | async)?.gerencia" [(ngModel)]="selectedGerencia"
+                                formControlName="gerencia">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="col-3">
+                            <ng-multiselect-dropdown [placeholder]="'Municípios'" [settings]="dropdownSettings"
+                                [data]="(filterData | async)?.municipio" [(ngModel)]="selectedMunicipio"
+                                formControlName="municipio">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="col-3">
+                            <ng-multiselect-dropdown [placeholder]="'Retorno do último callback'"
+                                [settings]="dropdownSettings" [data]="(filterData | async)?.ultimoCallaback" [(ngModel)]="selectedLastCallbackRetorno"
+                                formControlName="lastCallbackRetorno">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="col-3">
+                            <ng-multiselect-dropdown [placeholder]="'Estados'" [settings]="dropdownSettings"
+                                [data]="(filterData | async)?.estado" [(ngModel)]="selectedEstado"
+                                formControlName="estado">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <ng-multiselect-dropdown [placeholder]="'Distribuidoras'" [settings]="dropdownSettings"
+                                [data]="(filterData | async)?.distribuidora" [(ngModel)]="selectedDistribuidora"
+                                formControlName="distribuidora">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="col-3">
+                            <ng-multiselect-dropdown [placeholder]="'Alimentadores'" [settings]="dropdownSettings"
+                                [data]="[]" [(ngModel)]="selectedAlimentador" formControlName="alimentador">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="col-3">
+                            <input class="form-control" type="text" formControlName="uc" placeholder="UC da reclamação"
+                                mask="000000000000">
+                        </div>
+                        <div class="offset-1 col-1 d-grid mb-1">
+                            <button type="submit" class="btn btn-primary">Filtrar</button>
+                        </div>
+                        <div class="col-1 d-grid mb-1">
+                            <button type="reset" class="btn btn-secondary" (click)="onClear()">Limpar</button>
+                        </div>
+                    </div>
+                </form>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+</div>

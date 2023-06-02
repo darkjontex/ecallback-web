@@ -1,0 +1,75 @@
+<incidencia-filtro [socket]="_socket"></incidencia-filtro>
+
+<ng-container *ngIf="(incidencias | async) as incidencias">
+<div class="table-responsive">
+    <table class="table table-hover table-striped" style="font-size: 0.8rem">
+        <thead class="bg-dark text-white">
+            <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th colspan="4" style="background-color: cadetblue; text-align: center;">Ultimo Callback da incidência</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+            <tr>
+                <th scope="col"><input type="checkbox" /></th>
+                <th scope="col">Incidência</th>
+                <th scope="col">Data Inicio</th>
+                <th scope="col">Gerência</th>
+                <th scope="col">Prioridade</th>
+                <th scope="col">Avisos</th>
+                <th scope="col" style="background-color: cadetblue;">Retorno</th>
+                <th scope="col" style="background-color: cadetblue;">Enviado Em</th>
+                <th scope="col" style="background-color: cadetblue;">Tipo</th>
+                <th scope="col" style="background-color: cadetblue;">Exec</th>
+                <th scope="col">Em uso por</th>
+                <th scope="col">Reincidente</th>
+                <th scope="col">Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let incidencia of incidencias.data" style="cursor: pointer;">
+                <td><input type="checkbox" /></td>
+                <ng-container *ngIf="!incidencia?.activeUser">
+                    <td scope="row" [routerLink]="['/','incidencias', incidencia.id]">{{incidencia.numero}}</td>
+                    <td [routerLink]="['/','incidencias', incidencia.id]">{{incidencia?.dataInicio | date:'dd/MM/yyyy HH:mm'}}</td>
+                    <td [routerLink]="['/','incidencias', incidencia.id]">{{incidencia?.gerencia}}</td>
+                    <td [routerLink]="['/','incidencias', incidencia.id]">{{incidencia?.prioridade}}</td>
+                    <td [routerLink]="['/','incidencias', incidencia.id]">{{incidencia?.qntAvisos}}</td>
+                    <td [routerLink]="['/','incidencias', incidencia.id]">{{incidencia?.lastCallbackResultCode | resultCode}}</td>
+                    <td [routerLink]="['/','incidencias', incidencia.id]">{{incidencia?.lastCallbackCreatedAt | date:'dd/MM HH:mm'}}</td>
+                    <td [routerLink]="['/','incidencias', incidencia.id]">{{incidencia?.lastCallbackType}}</td>
+                    <td [routerLink]="['/','incidencias', incidencia.id]">{{incidencia?.lastCallbackRunner}}</td>
+                    <td [routerLink]="['/','incidencias', incidencia.id]">{{incidencia?.activeUser | uppercase}}</td>
+                    <td [routerLink]="['/','incidencias', incidencia.id]">{{incidencia?.reincidente === "0" ? "NÃO" : "SIM"}}</td>
+                    <td [routerLink]="['/','incidencias', incidencia.id]">{{incidencia?.estado}}</td>
+                </ng-container>
+                <ng-container *ngIf="incidencia?.activeUser">
+                    <td scope="row" [routerLink]="['/','incidencias', incidencia.id]">{{incidencia.numero}}</td>
+                    <td>{{incidencia?.dataInicio | date:'dd/MM/yyyy HH:mm'}}</td>
+                    <td>{{incidencia?.gerencia}}</td>
+                    <td>{{incidencia?.prioridade}}</td>
+                    <td>{{incidencia?.qntAvisos}}</td>
+                    <td>{{incidencia?.lastCallbackResultCode | resultCode}}</td>
+                    <td>{{incidencia?.lastCallbackCreatedAt | date:'dd/MM HH:mm'}}</td>
+                    <td>{{incidencia?.lastCallbackType}}</td>
+                    <td>{{incidencia?.lastCallbackRunner}}</td>
+                    <td>{{incidencia?.activeUser | uppercase}}</td>
+                    <td>{{incidencia?.reincidente === "0" ? "NÃO" : "SIM"}}</td>
+                    <td>{{incidencia?.estado}}</td>
+                </ng-container>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-pagination [socket]="_socket" [meta]="incidencias?.meta"></app-pagination>
+
+
+</ng-container>

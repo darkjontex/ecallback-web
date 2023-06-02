@@ -1,0 +1,43 @@
+<ng-container *ngIf="(callbacks | async) as callbacks">
+    <div class="table-responsive">
+        <table class="table table-hover table-striped" style="font-size: 0.8rem">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <!-- <th scope="col"><input type="checkbox"></th> -->
+                    <th scope="col">ID</th>
+                    <th scope="col">Distribuidora</th>
+                    <th scope="col">Ordem</th>
+                    <th scope="col">Reclamação</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Duração</th>
+                    <th scope="col">Gerência</th>
+                    <!-- <th scope="col">Medida Adotada</th> -->
+                    <th scope="col">Resultado</th>
+                    <th scope="col">Motivo</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Usuário</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let callback of callbacks?.data" style="cursor: pointer;">
+                    <td scope="row">{{callback.id}}</td>
+                    <td>{{callback.distribuidora}}</td>
+                    <td>{{callback.ordem}}</td>
+                    <td>{{callback.avisoNumero}}</td>
+                    <td>{{callback.dataInicio | date : 'dd/MM/YYYY HH:mm'}}</td>
+                    <!-- <td>{{callback.dataFim | date : 'dd/MM/YYYY HH:mm'}}</td> -->
+                    <td>{{callback.duracao | secondsToTime}}</td>
+                    <td>{{callback.gerencia}}</td>
+                    <!-- <td>{{callback.microregiao}}</td> -->
+                    <td>{{callback.resultCode | resultCode}}</td>
+                    <td>{{callback.subtipoDesc}}</td>
+                    <td>{{callback.unidadeConsumidora}}</td>
+                    <td>{{callback.username | uppercase}}</td>
+                    <!-- <td>{{callback.observacao}}</td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <app-pagination [socket]="_socket" [meta]="callbacks?.meta" [filter]="_filter"></app-pagination>
+</ng-container>
+

@@ -1,0 +1,23 @@
+.table-responsive {
+  position: sticky;
+//   height: 277px; //calc(100% - 30px);
+}
+
+.table > thead {
+  position: sticky;
+  top: 0;
+}
+
+@media(max-width: 1280px){
+    .table-responsive {
+        position: sticky;
+        height: 277px; //calc(100% - 30px);
+      }
+}
+
+@media(min-width: 1281px) {
+    .table-responsive {
+        position: sticky;
+        height: 400px; //calc(100% - 30px);
+      }
+}

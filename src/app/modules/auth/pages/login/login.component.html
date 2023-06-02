@@ -1,0 +1,33 @@
+<div class="card border-0 shadow rounded-3 mt-5 p-4 p-sm-5">
+    <img class="card-img-top" src="/assets/svg/enel.svg" alt="Logo" class="mb-2 mx-auto" style="width:200px">
+    <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-floating mb-3">
+                <input formControlName="username" type="text" class="form-control" id="floatingInput"
+                    placeholder="name@example.com">
+                <label for="floatingInput">Usuário</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input formControlName="password" type="password" class="form-control" id="floatingPassword"
+                    placeholder="Senha">
+                <label for="floatingPassword">Senha</label>
+            </div>
+
+            <div class="form-check mb-3">
+                <input formControlName="rememberMe" class="form-check-input" type="checkbox" value=""
+                    id="rememberPasswordCheck">
+                <label class="form-check-label" for="rememberPasswordCheck">
+                    Lembrar-me por 24h
+                </label>
+            </div>
+
+            <div class="d-grid">
+                <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Entrar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

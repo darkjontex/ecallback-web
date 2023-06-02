@@ -1,0 +1,35 @@
+<app-sidebar [isExpanded]="sidebarExpanded" (toggleSidebar)="sidebarExpanded = !sidebarExpanded"></app-sidebar>
+
+<div class="content" [ngClass]="{ 'sidebarExpanded': sidebarExpanded }">
+    <breadcrumb [prefix]="'Home'" [useBootstrap]="true"></breadcrumb>
+    <router-outlet></router-outlet>
+</div>
+
+<!--  -->
+
+<ng-template #ramalModal let-modal>
+    <div class="card border-0">
+        <div class="card-header bg-warning text-white d-flex justify-content-between align-items-center">
+            Ramal
+            <button type="button" class="btn btn-link text-white" (click)="modal.dismiss('Cross click')">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="dateOfBirth">Identifique o número do seu ramal</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping">
+                            <i class="bi bi-headset"></i>
+                        </span>
+                        <input formControlName="ramal" type="text" class="form-control" placeholder="(00) 0000-0000"
+                            aria-label="Número do ramal" aria-describedby="addon-wrapping"
+                            mask="(00) 00000-0000||(00) 0000-0000">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary float-end">Salvar</button>
+            </form>
+        </div>
+    </div>
+</ng-template>

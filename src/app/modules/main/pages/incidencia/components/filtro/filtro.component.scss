@@ -1,0 +1,20 @@
+::ng-deep .accordion-button:not(.collapsed) {
+    color: var(--bs-card-cap-color) !important;
+    background-color: var(--bs-card-cap-bg) !important;
+    box-shadow: var(--bs-card-border-width) solid var(--bs-card-border-color) !important;
+    border-bottom: var(--bs-card-border-width) solid var(--bs-card-border-color) !important;
+    padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
+}
+
+
+::ng-deep .accordion-button {
+    color: var(--bs-card-cap-color) !important;
+    background-color: var(--bs-card-cap-bg) !important;
+    box-shadow: var(--bs-card-border-width) solid var(--bs-card-border-color) !important;
+    border-bottom: var(--bs-card-border-width) solid var(--bs-card-border-color) !important;
+    padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
+}
+
+::ng-deep .accordion-item {
+    border: initial;
+}
